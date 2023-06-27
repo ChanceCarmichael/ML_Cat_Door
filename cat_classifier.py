@@ -23,3 +23,8 @@ if __name__ == "__main__":
     image = cat_detector(image)
     cv2.imshow("Cat Detector", image)
     cv2.waitKey(0)
+
+
+https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html 
+
+https://pytorch.org/tutorials/beginner/data_loading_tutorial.html
