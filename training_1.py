@@ -18,4 +18,9 @@ testset = torchvision.datasets.CIFAR10(root='./data', train=False,
 testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
                                          shuffle=False, num_workers=2)
 
-classes = ('cat','nocat')
+classes = ('cat','nocat') 
+
+
+https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html 
+
+https://pytorch.org/tutorials/beginner/data_loading_tutorial.html
