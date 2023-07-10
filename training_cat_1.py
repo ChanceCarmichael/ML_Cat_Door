@@ -19,6 +19,8 @@ import torch
 import torchvision 
 import torchvision.transforms as transforms
 
+#The output of torchvision datasets are PILImage images of range [0, 1]. 
+#We transform them to Tensors of normalized range [-1, 1].
 transform = transforms.Compose(
     [transforms.ToTensor(),
      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
@@ -45,13 +47,11 @@ if __name__ == '__main__':
 
 	# functions to show an image
 
-
 	def imshow(img):
 	    img = img / 2 + 0.5     # unnormalize
 	    npimg = img.numpy()
 	    plt.imshow(np.transpose(npimg, (1, 2, 0)))
 	    plt.show()
-
 
 	# get some random training images
 	dataiter = iter(trainloader)
@@ -91,6 +91,8 @@ if __name__ == '__main__':
 	net = Net() 
 
 #3. Define a Loss function and optimizer
+
+	#Let’s use a Classification Cross-Entropy loss and SGD with momentum.
 
 	import torch.optim as optim
 
@@ -184,7 +186,7 @@ if __name__ == '__main__':
 	for classname, correct_count in correct_pred.items():
 	    accuracy = 100 * float(correct_count) / total_pred[classname]
 	    print(f'Accuracy for class: {classname:5s} is {accuracy:.1f} %')
-	    
+
 
 
 
