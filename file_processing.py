@@ -53,7 +53,13 @@ def read_cat_file(filename):
 def traverse_files(path):
     for root, directories, files in os.walk(path):
         for file in files:
-            print(root,'\n',file,'\n-----------')
+            # print(root,'\n',file,'\n-----------')
+            file_extension = os.path.splitext(file)[1]
+            if file_extension == ".cat":
+                
+            else:
+                continue
+
 
 #Only Runs if running this module. Will not run if imported elsewhere. 
 if __name__ == "__main__":
