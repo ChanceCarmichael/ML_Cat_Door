@@ -8,7 +8,7 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms, utils
 import imghdr
 
-import file_processing.traverse_files
+import file_processing
 
 
 # Ignore warnings
@@ -17,29 +17,26 @@ warnings.filterwarnings("ignore")
 
 plt.ion()   # interactive mode 
 
-#Let’s take a single image name and its annotations from the CSV, 
-#in this case row index number 65 for person-7.jpg just as an example. 
-#Read it, store the image name in img_name and store its annotations in 
-#an (L, 2) array landmarks where L is the number of landmarks in that row.
 
-cat_df = traverse_files('archive')
+#Generate a pandas df of all cat images with annotations. 
+cat_df = file_processing.traverse_files('archive')
+
+#Normalize the data to be run through the model. 
+n=0
+img_name = cat_df.iloc[n, 0]
+landmarks = cat_df.iloc[n, 1:]
+landmarks = np.asarray(landmarks)
+landmarks = landmarks.astype('float').reshape(-1, 2)
+
+print('Image name: {}'.format(img_name))
+print('Landmarks shape: {}'.format(landmarks.shape))
+print('First 4 Landmarks: {}'.format(landmarks[:4]))
 
 ######Helper Functions########
 
-#Plots feature points on the images. 
-def show_landmarks(image, landmarks):
-    """Show image with landmarks"""
-    plt.imshow(image)
-    plt.scatter(landmarks[:, 0], landmarks[:, 1], s=10, marker='.', c='r')
-    plt.pause(0.001)  # pause a bit so that plots are updated
-# plt.figure()
-# show_landmarks(io.imread(os.path.join('data/faces/', img_name)),
-#                landmarks)
-# plt.show()
 
 #Only Runs if running this module. Will not run if imported elsewhere. 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
 
 #https://pytorch.org/tutorials/beginner/data_loading_tutorial.html
-
