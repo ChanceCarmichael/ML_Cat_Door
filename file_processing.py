@@ -8,42 +8,11 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms, utils
 import imghdr
 
-# #Create Empty Annotations Lists
-# filename_pts = [] 
-# points_pts = [] 
-# lefteye_pts = []
-# righteye_pts = [] 
-# mouth_pts = []
-# leftear1_pts = []
-# leftear2_pts = [] 
-# leftear3_pts = []
-# rightear1_pts = [] 
-# rightear2_pts = [] 
-# rightear3_pts = []
-
-# #Create the Dictionary for the annotations 
-# annotations = {
-# "Filename":filename_pts, 
-# "Points":points_pts, 
-# "LeftEye":lefteye_pts, 
-# "RightEye":righteye_pts, 
-# "Mouth":mouth_pts, 
-# "LeftEar1":leftear1_pts, 
-# "LeftEar2":leftear2_pts,
-# "LeftEar3":leftear3_pts,
-# "RightEar1":rightear1_pts, 
-# "RightEar2":rightear2_pts, 
-# "RightEar3":rightear3_pts 
-# }
-
-# df = pd.DataFrame(annotations)
-
-#Convert .cat file to a pandas df. 
-
 #File Traversal
 def traverse_files(path):
+    
     df = pd.DataFrame()
-
+#This will iternate over the entire directory and sort it into an empty pandas dataframe. 
     for root, directories, files in os.walk(path):
         for file in files:
             file_name, file_extension = os.path.splitext(file)
@@ -56,15 +25,24 @@ def traverse_files(path):
                         df = df.append({
                             'Filename': file_name,
                             'Points': row[0],
-                            'Left Eye': row[1:3],
-                            'Right Eye': row[3:5],
-                            'Mouth': row[5:7],
-                            'Left Ear-1': row[7:9],
-                            'Left Ear-2': row[9:11],
-                            'Left Ear-3': row[11:13],
-                            'Right Ear-1': row[13:15],
-                            'Right Ear-2': row[15:17],
-                            'Right Ear-3': row[17:19]
+                            'Left Eye x': row[1],
+                            'Left Eye y': row[2],
+                            'Right Eye x': row[3],
+                            'Right Eye y': row[4],
+                            'Mouth x': row[5],
+                            'Mouth y': row[6],
+                            'Left Ear-1 x': row[7],
+                            'Left Ear-1 y': row[8],
+                            'Left Ear-2 x': row[9],
+                            'Left Ear-2 y': row[10],
+                            'Left Ear-3 x': row[11],
+                            'Left Ear-3 y': row[12],
+                            'Right Ear-1 x': row[13],
+                            'Right Ear-1 y': row[14],
+                            'Right Ear-2 x': row[15],
+                            'Right Ear-2 y': row[16],
+                            'Right Ear-3 x': row[17],
+                            'Right Ear-3 y': row[18]
                         }, ignore_index=True)
             else:
                 continue
