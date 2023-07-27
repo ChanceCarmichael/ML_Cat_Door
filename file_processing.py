@@ -7,6 +7,7 @@ def traverse_files(path):
     df = pd.DataFrame()
 #This will iternate over the entire directory and sort it into an empty pandas dataframe. 
     for root, directories, files in os.walk(path):
+        
         for file in files:
             file_name, file_extension = os.path.splitext(file)
             if file_extension == ".cat":
@@ -39,11 +40,15 @@ def traverse_files(path):
                         }, ignore_index=True)
             else:
                 continue
-    return df.to_csv('cat_df_new.py')
+    print(root)
+    print(directories)
+    print(files)           
+    return df #.to_csv('cat_df_new.py')
+
 
 #Only Runs if running this module. Will not run if imported elsewhere. 
 if __name__ == "__main__":
-	traverse_files('archive')
+	print(traverse_files('archive'))
     
 
     
