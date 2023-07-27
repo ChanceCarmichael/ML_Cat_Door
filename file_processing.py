@@ -1,12 +1,5 @@
 import os
-import torch
 import pandas as pd
-from skimage import io, transform
-import numpy as np
-import matplotlib.pyplot as plt
-from torch.utils.data import Dataset, DataLoader
-from torchvision import transforms, utils
-import imghdr
 
 #File Traversal
 def traverse_files(path):
@@ -23,7 +16,7 @@ def traverse_files(path):
                         file_name = os.path.splitext(file)[0]
                         row = line.split(' ')
                         df = df.append({
-                            'Filename': file_name,
+                            'Filename': root+'/'+file_name,
                             'Points': row[0],
                             'Left Eye x': row[1],
                             'Left Eye y': row[2],
@@ -46,11 +39,11 @@ def traverse_files(path):
                         }, ignore_index=True)
             else:
                 continue
-    return df
+    return df.to_csv('cat_df_new.py')
 
 #Only Runs if running this module. Will not run if imported elsewhere. 
 if __name__ == "__main__":
-	print(traverse_files('archive'))
+	traverse_files('archive')
     
 
     
