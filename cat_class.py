@@ -4,6 +4,7 @@ import pandas as pd
 from skimage import io, transform
 import numpy as np
 from torch.utils.data import Dataset
+from torchvision import transforms, utils
 
 #-------------------------Building the Dataset class-----------------------#
 class CatLandmarksDataset(Dataset):
@@ -39,3 +40,8 @@ class CatLandmarksDataset(Dataset):
             sample = self.transform(sample)
 
         return sample
+
+#Only Runs if running this module. Will not run if imported elsewhere. 
+if __name__ == "__main__":
+    #Instantiate the Class
+    class_test = CatLandmarksDataset(csv_file='cat_df_new.csv', root_dir='archive/CAT_00')

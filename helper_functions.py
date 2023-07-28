@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from cat_class import CatLandmarksDataset
 
 #--------------Helper Functions---------------#
 

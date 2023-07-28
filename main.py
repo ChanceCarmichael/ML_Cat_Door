@@ -7,9 +7,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms, utils
-import imghdr
 import file_processing
-import cat_class
+from cat_class import CatLandmarksDataset
 from helper_functions import *
 
 
@@ -45,7 +44,7 @@ root_dirs = ['archive/CAT_00', 'archive/CAT_01', 'archive/CAT_02',
 'archive/CAT_03', 'archive/CAT_04', 'archive/CAT_05', 'archive/CAT_06']
 catimages = get_catimages(root_dirs)
 
-cat_dataset = cat_class.CatLandmarksDataset(csv_file='cat_df_new.csv', root_dir=catimages)
+cat_dataset = CatLandmarksDataset(csv_file='cat_df_new.csv', root_dir=catimages)
 
 fig = plt.figure()
 

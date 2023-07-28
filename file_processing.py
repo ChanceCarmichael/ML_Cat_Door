@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-#File Traversal
+#File Traversalpython3 
 def traverse_files(path):
     
     df = pd.DataFrame()
@@ -40,15 +40,13 @@ def traverse_files(path):
                         }, ignore_index=True)
             else:
                 continue
-    print(root)
-    print(directories)
-    print(files)           
-    return df #.to_csv('cat_df_new.py')
+            
+    return df.to_csv('cat_df_new.csv')
 
 
 #Only Runs if running this module. Will not run if imported elsewhere. 
 if __name__ == "__main__":
-	print(traverse_files('archive'))
+	traverse_files('archive')
     
 
     
