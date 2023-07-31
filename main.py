@@ -43,6 +43,7 @@ plt.show()
 root_dirs = ['archive/CAT_00', 'archive/CAT_01', 'archive/CAT_02', 
 'archive/CAT_03', 'archive/CAT_04', 'archive/CAT_05', 'archive/CAT_06']
 catimages = get_catimages(root_dirs)
+print(catimages)
 
 cat_dataset = CatLandmarksDataset(csv_file='cat_df_new.csv', root_dir=catimages)
 
