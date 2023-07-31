@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import shutil
 
 #File Traversalpython3 
 def traverse_files(path):
@@ -7,7 +8,6 @@ def traverse_files(path):
     df = pd.DataFrame()
 #This will iternate over the entire directory and sort it into an empty pandas dataframe. 
     for root, directories, files in os.walk(path):
-        
         for file in files:
             file_name, file_extension = os.path.splitext(file)
             if file_extension == ".cat":
@@ -43,10 +43,25 @@ def traverse_files(path):
             
     return df.to_csv('cat_df_new.csv')
 
+def group_image_files(source_path, dest_path):
+    for root, directories, files in os.walk(source_path):
+        for file in files:
+            file_name, file_extension = os.path.splitext(file)
+            if file_extension == ".jpg": 
+                new_name = os.path.join(root,file)
+                print(dest_path)
+                print(os.path.join(root,file))
+                print(file)
+                print(root)
+                shutil.copy(os.path.join(root,file), os.path.join(dest_path,new_name))
+                #shutil.move(os.path.join(root,file), dest_path)
+            else: 
+                continue
 
 #Only Runs if running this module. Will not run if imported elsewhere. 
 if __name__ == "__main__":
-	traverse_files('archive')
+	# traverse_files('archive')
+    group_image_files('archive', 'cat_images')
     
 
     
