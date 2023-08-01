@@ -17,7 +17,7 @@ def traverse_files(path):
                         file_name = os.path.splitext(file)[0]
                         row = line.split(' ')
                         df = df.append({
-                            'Filename': root+'/'+file_name,
+                            'Filename': file_name,
                             'Points': row[0],
                             'Left Eye x': row[1],
                             'Left Eye y': row[2],
@@ -41,28 +41,28 @@ def traverse_files(path):
             else:
                 continue
             
-    return df.to_csv('cat_df_new.csv')
+    return df.to_csv('cat_df.csv')
 
 def group_image_files(source_path, dest_path):
+    # n=0
     for root, directories, files in os.walk(source_path):
         for file in files:
             file_name, file_extension = os.path.splitext(file)
             if file_extension == ".jpg": 
                 source_file = os.path.join(root,file)
                 new_name = os.path.join(root,file)
-                print('Source: ',source_file)
-                print('Destination: ',dest_path)
-                print('New Name: ',new_name)
-                print(file)
-                print(root)
-                shutil.copy(source_file, dest_path)
-                # os.rename(os.path.join(dest_path,file), new_name)
-            else: 
+                shutil.copy(source_file,dest_path)
+                # cat_number = 'cat_'+ str(n) + '.jpg'
+                # n+=1
+
+                os.rename(os.path.join(root,file), f'cat_images/{file}')
+            else:    
                 continue
 
 #Only Runs if running this module. Will not run if imported elsewhere. 
 if __name__ == "__main__":
-	# traverse_files('archive')
+    print('###############################################################')
+	#traverse_files('archive')
     group_image_files('archive', 'cat_images')
     
 
