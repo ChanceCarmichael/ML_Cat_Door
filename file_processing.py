@@ -48,13 +48,15 @@ def group_image_files(source_path, dest_path):
         for file in files:
             file_name, file_extension = os.path.splitext(file)
             if file_extension == ".jpg": 
+                source_file = os.path.join(root,file)
                 new_name = os.path.join(root,file)
-                print(dest_path)
-                print(os.path.join(root,file))
+                print('Source: ',source_file)
+                print('Destination: ',dest_path)
+                print('New Name: ',new_name)
                 print(file)
                 print(root)
-                shutil.copy(os.path.join(root,file), os.path.join(dest_path,new_name))
-                #shutil.move(os.path.join(root,file), dest_path)
+                shutil.copy(source_file, dest_path)
+                # os.rename(os.path.join(dest_path,file), new_name)
             else: 
                 continue
 
