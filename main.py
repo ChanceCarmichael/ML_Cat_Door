@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms, utils
 import file_processing
-from cat_class import CatLandmarksDataset
+from cat_class import *
 from helper_functions import *
 
 
@@ -57,4 +57,22 @@ for i, sample in enumerate(cat_dataset):
     if i == 3:
         plt.show()
         break
+
+#Resize and compose all cat images so they are uniform. 
+scale = Rescale(256)
+crop = RandomCrop(128)
+composed = transforms.Compose([Rescale(256),RandomCrop(224)])
+
+# Apply each of the above transforms on sample.
+fig = plt.figure()
+sample = cat_dataset[65]
+for i, tsfrm in enumerate([scale, crop, composed]):
+    transformed_sample = tsfrm(sample)
+
+    ax = plt.subplot(1, 3, i + 1)
+    plt.tight_layout()
+    ax.set_title(type(tsfrm).__name__)
+    show_landmarks(**transformed_sample)
+
+plt.show()
 
