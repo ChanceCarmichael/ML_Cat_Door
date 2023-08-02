@@ -28,10 +28,9 @@ class CatLandmarksDataset(Dataset):
         if torch.is_tensor(idx):
             idx = idx.tolist()
 
-        img_name = os.path.join(self.root_dir,
-                                self.landmarks_frame.iloc[idx, 0])
+        img_name = os.path.join(self.root_dir,self.landmarks_frame.iloc[idx, 1])
         image = io.imread(img_name)
-        landmarks = self.landmarks_frame.iloc[idx, 1:]
+        landmarks = self.landmarks_frame.iloc[idx, 3:]
         landmarks = np.array([landmarks])
         landmarks = landmarks.astype('float').reshape(-1, 2)
         sample = {'image': image, 'landmarks': landmarks}
@@ -41,7 +40,5 @@ class CatLandmarksDataset(Dataset):
 
         return sample
 
-#Only Runs if running this module. Will not run if imported elsewhere. 
-if __name__ == "__main__":
-    #Instantiate the Class
-    class_test = CatLandmarksDataset(csv_file='cat_df_new.csv', root_dir='archive/CAT_00')
+
+ 

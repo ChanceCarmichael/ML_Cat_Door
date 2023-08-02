@@ -23,7 +23,7 @@ plt.ion()   # interactive mode
 # cat_df = file_processing.traverse_files('archive')
 
 #Normalize the data to be run through the model. Reshape 
-cat_landmarks = pd.read_csv('cat_df_new.csv')
+cat_landmarks = pd.read_csv('cat_df.csv')
 n=0
 img_name = cat_landmarks.iloc[n, 1]
 landmarks = cat_landmarks.iloc[n, 3:]
@@ -36,16 +36,12 @@ print('First 4 Landmarks: {}'.format(landmarks[:9]))
 
 #Show Landmarks on Image
 plt.figure()
-show_landmarks(io.imread(os.path.join(img_name)),landmarks)
+show_landmarks(io.imread(os.path.join('cat_images',img_name)),landmarks)
 plt.show()
 
 #Instantiate the Class
-root_dirs = ['archive/CAT_00', 'archive/CAT_01', 'archive/CAT_02', 
-'archive/CAT_03', 'archive/CAT_04', 'archive/CAT_05', 'archive/CAT_06']
-catimages = get_catimages(root_dirs)
-print(catimages)
 
-cat_dataset = CatLandmarksDataset(csv_file='cat_df_new.csv', root_dir='archive')
+cat_dataset = CatLandmarksDataset(csv_file='cat_df.csv', root_dir='cat_images')
 
 fig = plt.figure()
 
