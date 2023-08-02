@@ -76,3 +76,36 @@ for i, tsfrm in enumerate([scale, crop, composed]):
 
 plt.show()
 
+#Interate through the Dataset and add the transforms
+transformed_dataset = CatLandmarksDataset(csv_file='cat_df.csv',root_dir='cat_images',
+                                           transform=transforms.Compose([
+                                               Rescale(256),
+                                               RandomCrop(224),
+                                               ToTensor()
+                                           ]))
+
+for i, sample in enumerate(transformed_dataset):
+    print(i, sample['image'].size(), sample['landmarks'].size())
+
+    if i == 3:
+        break
+
+#Need to add in dataloader features. Allows for batching the data, shuffling, and multiprocessing. 
+dataloader = DataLoader(transformed_dataset, batch_size=4, shuffle=True, num_workers=0)
+
+# if you are using Windows, uncomment the next line and indent the for loop.
+# you might need to go back and change ``num_workers`` to 0.
+
+# if __name__ == '__main__':
+for i_batch, sample_batched in enumerate(dataloader):
+    print(i_batch, sample_batched['image'].size(),
+          sample_batched['landmarks'].size())
+
+    # observe 4th batch and stop.
+    if i_batch == 3:
+        plt.figure()
+        show_landmarks_batch(sample_batched)
+        plt.axis('off')
+        plt.ioff()
+        plt.show()
+        break
