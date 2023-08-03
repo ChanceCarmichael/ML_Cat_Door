@@ -93,7 +93,7 @@ class RandomCrop(object):
             self.output_size = output_size
 
     def __call__(self, sample):
-        image, landmarks = sample['image'], sample['landmarks']
+        image, landmarks = sample['image'], sample['landmarks'].astype('float32')
 
         h, w = image.shape[:2]
         new_h, new_w = self.output_size
@@ -113,7 +113,7 @@ class ToTensor(object):
     """Convert ndarrays in sample to Tensors."""
 
     def __call__(self, sample):
-        image, landmarks = sample['image'], sample['landmarks']
+        image, landmarks = sample['image'], sample['landmarks'].astype('float32')
 
         # swap color axis because
         # numpy image: H x W x C
