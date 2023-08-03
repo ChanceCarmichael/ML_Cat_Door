@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from cat_class import CatLandmarksDataset
 import os 
 import shutil
+from torchvision import utils
 
 #--------------Helper Functions---------------#
 
