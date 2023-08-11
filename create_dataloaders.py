@@ -1,7 +1,7 @@
 #PyTorch allows us to easily construct DataLoader objects from images stored in directories on disk. 
 
 # import the necessary packages
-from . import config
+import config
 from torch.utils.data import DataLoader
 from torchvision import datasets
 import os 

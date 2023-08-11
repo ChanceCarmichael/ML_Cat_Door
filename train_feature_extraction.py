@@ -3,8 +3,8 @@
 # USAGE
 # python train_feature_extraction.py
 # import the necessary packages
-from pyimagesearch import config
-from pyimagesearch import create_dataloaders
+import config
+import create_dataloaders
 from imutils import paths
 from torchvision.models import resnet50
 from torchvision import transforms
@@ -107,3 +107,41 @@ for e in tqdm(range(config.EPOCHS)):
 			# calculate the number of correct predictions
 			valCorrect += (pred.argmax(1) == y).type(
 				torch.float).sum().item()		
+				# calculate the average training and validation loss
+	avgTrainLoss = totalTrainLoss / trainSteps
+	avgValLoss = totalValLoss / valSteps
+	# calculate the training and validation accuracy
+	trainCorrect = trainCorrect / len(trainDS)
+	valCorrect = valCorrect / len(valDS)
+	# update our training history
+	H["train_loss"].append(avgTrainLoss.cpu().detach().numpy())
+	H["train_acc"].append(trainCorrect)
+	H["val_loss"].append(avgValLoss.cpu().detach().numpy())
+	H["val_acc"].append(valCorrect)
+	# print the model training and validation information
+	print("[INFO] EPOCH: {}/{}".format(e + 1, config.EPOCHS))
+	print("Train loss: {:.6f}, Train accuracy: {:.4f}".format(
+		avgTrainLoss, trainCorrect))
+	print("Val loss: {:.6f}, Val accuracy: {:.4f}".format(
+		avgValLoss, valCorrect)) 
+
+# display the total time needed to perform the training
+endTime = time.time()
+print("[INFO] total time taken to train the model: {:.2f}s".format(
+	endTime - startTime))
+# plot the training loss and accuracy
+plt.style.use("ggplot")
+plt.figure()
+plt.plot(H["train_loss"], label="train_loss")
+plt.plot(H["val_loss"], label="val_loss")
+plt.plot(H["train_acc"], label="train_acc")
+plt.plot(H["val_acc"], label="val_acc")
+plt.title("Training Loss and Accuracy on Dataset")
+plt.xlabel("Epoch #")
+plt.ylabel("Loss/Accuracy")
+plt.legend(loc="lower left")
+plt.savefig(config.WARMUP_PLOT)
+# serialize the model to disk
+torch.save(model, config.WARMUP_MODEL) 
+
+
