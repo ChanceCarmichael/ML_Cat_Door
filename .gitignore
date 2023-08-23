@@ -1,3 +1,6 @@
 # Ignore image directories/images
 /cat_images
 /cat_venv
+
+# Ignore datasets
+/dataset
