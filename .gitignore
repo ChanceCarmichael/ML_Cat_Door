@@ -4,3 +4,6 @@
 
 # Ignore datasets
 /dataset
+
+# Caches
+/__pycache__
