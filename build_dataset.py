@@ -8,9 +8,12 @@ from imutils import paths
 import numpy as np
 import shutil
 import os 
+from pathlib import Path
 
 def copy_images(imagePaths, folder):
 	# check if the destination folder exists and if not create it
+	if Path(folder):
+		print("YAY")
 	if not os.path.exists(folder):
 		os.makedirs(folder)
 	# loop over the image paths
