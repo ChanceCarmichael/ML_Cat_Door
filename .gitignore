@@ -1,2 +1,3 @@
 # Ignore image directories/images
-/images
+/cat_images
+/cat_venv
